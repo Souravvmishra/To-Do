@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="antialiased bg-slate-200 text-slate-700 m-4 ">
+
+    <!-- component -->
+    <nav class="bg-white shadow dark:bg-gray-800">
+        <div
+            class="container flex items-center justify-around py-4 mx-auto text-gray-600 capitalize dark:text-gray-300">
+            <a href="/" class="text-gray-800 dark:text-gray-200 border-b-2 border-blue-500 mx-1.5 sm:mx-6">home</a>
+
+            <a href="#"
+                class="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-500 mx-1.5 sm:mx-6">Add
+                New</a>
+
+            <a href="#"
+                class="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-500 mx-1.5 sm:mx-6">About</a>
+
+            <a href="#"
+                class="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-500 mx-1.5 sm:mx-6">Contact
+                Us</a>
+        </div>
+    </nav>
+
+
+
+
+
+
+
+
+    <!-- component -->
+    <div class="max-w-lg mx-auto my-10 bg-white p-8 rounded-xl shadow shadow-slate-300">
+
+
+        <form action="/add" method="POST">
+            <div class="flex space-x-4 pb-14 pt-4 ">
+                <div class="flex rounded-md overflow-hidden h-10 w-full">
+                    <input id="addNew" required autocomplete="off" value="" type="text" name="title"
+                        class="w-full rounded-md rounded-r-none border border-slate-200 px-4"
+                        placeholder="Add New To-Do" />
+                    <button type="submit"
+                        class="bg-indigo-600 text-white px-2 sm:px-6 text-sm sm:text-lg font-semibold  rounded-r-md hover:text-white  hover:bg-indigo-500">Add</button>
+                </div>
+                <button type="reset"  id="clear" 
+                class="bg-white h-10 px-2 sm:px-6 text-sm sm:text-lg font-semibold  rounded-md border border-slate-200 hover:bg-slate-200">Clear</button>
+            </form>
+    </div>
+
+    <script>
+        document.getElementById("addNew").focus();
+    </script>
+
+    
+
+
+   
+    <div class="flex flex-row justify-between items-center">
+        <div>
+            <h1 class="text-3xl font-medium">Tasks list</h1>
+        </div>
+        <div class="inline-flex space-x-2 items-center">
+            <a href="#"
+                class="p-2 border border-slate-200 rounded-md inline-flex space-x-1 items-center text-indigo-200 hover:text-white bg-indigo-600 hover:bg-indigo-500">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span class="text-sm font-medium hidden md:block">Urgent</span>
+            </a>
+            <a href="#"
+                class="p-2 border border-slate-200 rounded-md inline-flex space-x-1 items-center hover:bg-slate-200">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                </svg>
+                <span class="text-sm hidden md:block">Latest</span>
+            </a>
+        </div>
+    </div>
+    <p class="text-slate-500">Hello, here are your latest tasks</p>
+
+    <div id="tasks" class="my-5">
+
+        {% if list|length == 0 %}
+        <section class="flex items-center h-full sm:p-16 dark:bg-gray-900 dark:text-gray-100">
+            <div class="container flex flex-col items-center justify-center px-5 mx-auto space-y-4 text-center sm:max-w-md">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-14 h-14 dark:text-gray-600">
+                    <path fill="currentColor" d="M256,16C123.452,16,16,123.452,16,256S123.452,496,256,496,496,388.548,496,256,388.548,16,256,16ZM403.078,403.078a207.253,207.253,0,1,1,44.589-66.125A207.332,207.332,0,0,1,403.078,403.078Z"></path>
+                    <rect width="176" height="32" x="168" y="320" fill="currentColor"></rect>
+                    <polygon fill="currentColor" points="210.63 228.042 186.588 206.671 207.958 182.63 184.042 161.37 162.671 185.412 138.63 164.042 117.37 187.958 141.412 209.329 120.042 233.37 143.958 254.63 165.329 230.588 189.37 251.958 210.63 228.042"></polygon>
+                    <polygon fill="currentColor" points="383.958 182.63 360.042 161.37 338.671 185.412 314.63 164.042 293.37 187.958 317.412 209.329 296.042 233.37 319.958 254.63 341.329 230.588 365.37 251.958 386.63 228.042 362.588 206.671 383.958 182.63"></polygon>
+                </svg>
+                <p class="text-3xl">Looks like You've Done Everything</p>
+                
+            </div>
+        </section>  
+        {% endif %}
+
+        {% for i in list %}
+
+        
+        {% if i.completed == True %}
+
+
+        <div id="task"
+            class="flex justify-between items-center border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent">
+            <div class="inline-flex items-center space-x-2">
+                <div>
+                    <a href="/completed/{{i.sno}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="green" class="w-6 h-6 text-slate-500">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="text-slate-500 line-through decoration-green-400 decoration-2 px-2 overflow-hidden ">{{i.title}}</div>
+            </div>
+            <div>
+                <a href="/delete/{{i.sno}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="crimson" class="w-4 h-4 hover:text-slate-700 hover:cursor-pointer hover:text-red-500">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+        {% else %}
+
+        <div id="task"
+            class="flex justify-between items-center border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent bg-gradient-to-r from-transparent to-transparent hover:from-slate-100 transition ease-linear duration-150">
+            <div class="inline-flex items-center space-x-2">
+                <div>
+                    <a href="/completed/{{i.sno}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="gold" class="w-6 h-6 text-slate-500 hover:text-indigo-600 hover:cursor-pointer">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="px-2 overflow-hidden">{{i.title}}</div>
+            </div>
+            <div>
+                <a href="/delete/{{i.sno}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="crimson" class="w-4 h-4 text-red-500 hover:text-red-700 hover:cursor-pointer">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+        {% endif %}
+
+        {% endfor %}
+
+
+        <p class="pt-8 text-xs text-slate-500 text-center">Last updated <span id="timer" class="">0</span> minutes ago</p>
+    </div>
+
+    <script>
+        let i = 0;
+        setInterval(() => {
+            document.getElementById("timer").innerText = i
+            i++
+        }, 60000);
+    </script>
+
+
+
+
+</body>
+
+</html>
