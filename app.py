@@ -19,7 +19,7 @@ class Todo(db.Model):
 
 @app.route('/')
 def home():
-    list = Todo.query.all()
+    list = Todo.query.order_by(Todo.sno.desc()).all()
     print(list)
     return render_template("index.html", list = list)
 
